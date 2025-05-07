@@ -23,8 +23,7 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { target } = e;
-    const { name, value } = target;
+    const { name, value } = e.target;
 
     setForm({
       ...form,
@@ -32,20 +31,42 @@ const Contact = () => {
     });
   };
 
+  const isEmailValid = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Trim input values to prevent whitespace-only entries
+    const trimmedName = form.name.trim();
+    const trimmedEmail = form.email.trim();
+    const trimmedMessage = form.message.trim();
+
+    // Validation
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      alert("Please fill in all the fields before submitting.");
+      return;
+    }
+
+    if (!isEmailValid(trimmedEmail)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     setLoading(true);
 
     emailjs
       .send(
-        "service_8nwn2od", // Your EmailJS service ID
-        "template_dx77e0s", // Your EmailJS template ID
+        "service_8nwn2od",
+        "template_dx77e0s",
         {
-          from_name: form.name,
+          from_name: trimmedName,
           to_name: "Aastha Jha",
-          from_email: form.email,
+          from_email: trimmedEmail,
           to_email: "aasthajha002@gmail.com",
-          message: form.message,
+          message: trimmedMessage,
         },
         "yNfFiph9rYbGzXn_Z"
       )
@@ -63,16 +84,13 @@ const Contact = () => {
         (error) => {
           setLoading(false);
           console.error(error);
-
           alert("Ahh, something went wrong. Please try again.");
         }
       );
   };
 
   return (
-    <div
-      className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
-    >
+    <div className="xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden">
       <motion.div
         variants={slideIn("left", "tween", 0.2, 1)}
         className="flex-[0.75] bg-black-100 p-8 rounded-2xl"
@@ -97,7 +115,7 @@ const Contact = () => {
             />
           </label>
           <label className="flex flex-col">
-            <span className="text-white font-medium mb-4">Your email</span>
+            <span className="text-white font-medium mb-4">Your Email</span>
             <input
               type="email"
               name="email"
