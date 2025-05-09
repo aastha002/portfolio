@@ -4,32 +4,39 @@ import {
   About,
   Contact,
   Experience,
-  Hero,
-  Navbar,
+  Certifications,
   Tech,
   Works,
-  Certifications,
   StarsCanvas,
+  Navbar,
+  Hero,
   Footer,
 } from "./components";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="relative z-0 bg-primary">
+      <div className="relative z-10 bg-primary overflow-x-hidden">
+        {/* Hero Section with Navbar */}
         <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
           <Navbar />
           <Hero />
         </div>
+
+        {/* Main Sections */}
         <About />
         <Experience />
         <Tech />
         <Works />
         <Certifications />
-        <div className="relative z-0">
+
+        {/* Contact + Stars */}
+        <div className="relative z-10">
           <Contact />
           <StarsCanvas />
         </div>
+
+        {/* Footer */}
         <Footer />
       </div>
     </BrowserRouter>
