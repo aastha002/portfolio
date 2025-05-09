@@ -89,10 +89,10 @@ const technologies = [
   { name: "Tailwind CSS", icon: tailwind },
   { name: "Node.js", icon: nodejs },
   { name: "MongoDB", icon: mongodb },
-  { name: "Git", icon: git},
-  { name: "Figma", icon: figma },
   { name: "kotlin", icon: kotlin },
   {name : "Next.js", icon: next},
+  {name : "GitHub" , icon : git},
+  {name : "Figma" , icon : figma }
 ];
 
 const experiences = [
@@ -239,7 +239,7 @@ const projects = [
         color: "blue-text-gradient",
       },
       {
-        name: "Tilwind CSS",
+        name: "Tailwind CSS",
         color: "pink-text-gradient",
       },
       
